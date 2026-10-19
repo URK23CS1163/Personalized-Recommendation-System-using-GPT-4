@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pink Picks — Personalized Recommendations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Background Decorations -->
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Pink <span>Picks</span></span>
+        </div>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            AI Recommendation Engine
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div class="hero-badge">
+            <span>✦</span>
+            POWERED BY GENERATIVE AI
+        </div>
+
+        <h1>
+            Recommendations that
+            <span>understand you.</span>
+        </h1>
+
+        <p>
+            Tell us what you love, what you need, and what matters to you.
+            Our AI creates recommendations tailored specifically to your preferences.
+        </p>
+
+    </section>
+
+
+    <!-- Main Application -->
+
+    <main class="app-container">
+
+
+        <!-- Profile Card -->
+
+        <section class="glass-card profile-card">
+
+            <div class="section-heading">
+
+                <div class="heading-icon">
+                    ◉
+                </div>
+
+                <div>
+                    <h2>Tell us about yourself</h2>
+
+                    <p>
+                        Help our AI understand your preferences
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>Your Name</label>
+
+                    <div class="input-wrapper">
+
+                        <span>⌁</span>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name">
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Age</label>
+
+                    <div class="input-wrapper">
+
+                        <span>◷</span>
+
+                        <input
+                            type="number"
+                            id="age"
+                            placeholder="Your age">
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group full">
+
+                    <label>What are you interested in?</label>
+
+                    <div class="input-wrapper">
+
+                        <span>✦</span>
+
+                        <input
+                            type="text"
+                            id="interest"
+                            placeholder="Movies, books, travel, technology, food...">
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group full">
+
+                    <label>Your Preferences</label>
+
+                    <textarea
+                        id="preferences"
+                        placeholder="Tell us what you like. Example: Sci-Fi movies, short books, budget travel, vegetarian food..."></textarea>
+
+                </div>
+
+
+                <div class="input-group full">
+
+                    <label>What are you looking for?</label>
+
+                    <textarea
+                        id="requirements"
+                        placeholder="Describe exactly what you need..."></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button class="primary-btn"
+                    onclick="getRecommendations()">
+
+                <span>Generate My Recommendations</span>
+
+                <span class="btn-arrow">→</span>
+
+            </button>
+
+        </section>
+
+
+
+        <!-- Recommendation Section -->
+
+        <section class="results-section">
+
+            <div class="results-header">
+
+                <div>
+
+                    <div class="mini-label">
+                        ✦ AI CURATED FOR YOU
+                    </div>
+
+                    <h2>Your Recommendations</h2>
+
+                    <p>
+                        Personalized results based on your interests and requirements.
+                    </p>
+
+                </div>
+
+                <div class="ai-badge">
+                    <span class="pulse"></span>
+                    AI READY
+                </div>
+
+            </div>
+
+            <p id="recommendationNotice" class="recommendation-notice" hidden></p>
+
+            <div id="recommendations"
+                 class="recommendations-grid">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ✦
+                    </div>
+
+                    <h3>Your personalized list is waiting</h3>
+
+                    <p>
+                        Fill in your preferences above and let AI
+                        discover recommendations made for you.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Feedback Section -->
+
+        <section class="glass-card feedback-card">
+
+            <div class="section-heading">
+
+                <div class="heading-icon purple">
+                    ↻
+                </div>
+
+                <div>
+
+                    <h2>Make it even better</h2>
+
+                    <p>
+                        Give feedback and let AI refine your recommendations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <textarea
+                id="feedback"
+                class="feedback-input"
+                placeholder="Example: I prefer budget-friendly options, less popular choices, and something suitable for beginners..."></textarea>
+
+
+            <button class="secondary-btn"
+                    onclick="refineRecommendations()">
+
+                <span>Refine Recommendations</span>
+
+                <span>↻</span>
+
+            </button>
+
+            <p id="refinementNotice" class="recommendation-notice" hidden></p>
+
+        </section>
+
+
+
+        <!-- Refined Results -->
+
+        <section class="results-section refined-section">
+
+            <div class="results-header">
+
+                <div>
+
+                    <div class="mini-label">
+                        ↻ REFINED BY YOUR FEEDBACK
+                    </div>
+
+                    <h2>Updated Recommendations</h2>
+
+                </div>
+
+            </div>
+
+
+            <div id="refinedRecommendations"
+                 class="recommendations-grid">
+
+                <div class="empty-state small">
+
+                    <div class="empty-icon">
+                        ↻
+                    </div>
+
+                    <p>
+                        Your refined recommendations will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-logo">
+            ✦ Pink Picks
+        </div>
+
+        <p>
+            Personalized recommendations powered by Generative AI
+        </p>
+
+        <div class="footer-line"></div>
+
+        <small>
+            24CS2506 · Building Applications using GPT-4
+        </small>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
